@@ -6,7 +6,9 @@ namespace TestWork4ForPromit.Uploader
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            using var uploader = new Uploader();
+
+            uploader.Start();
         }
     }
 }
