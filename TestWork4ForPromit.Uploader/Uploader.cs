@@ -7,65 +7,34 @@ using System.Threading.Tasks;
 
 namespace TestWork4ForPromit.Uploader
 {
-    public class Uploader : IDisposable
+    public class Uploader
     {
-        private FileStream _file;
-        private FrequencyDictionary _dictionary = new FrequencyDictionary();
-
-        public void Dispose()
-        {
-            if (_file != null)
-            {
-                _file.Dispose();
-            }
-        }
-
+        private readonly FrequencyDictionary _dictionary = new FrequencyDictionary();
+        
         public void Start()
         {
-            _file = GetFIle();
-
-
+            FillDictionary();
         }
 
-        private FileStream GetFIle()
+        private void FillDictionary()
         {
-            FileStream file = null;
+            var pathFile = GetCheckedPath();
+
+            var analyzer = new FileAnalyzer(pathFile);
+            analyzer.Start(_dictionary);
+        }
+
+        private string GetCheckedPath()
+        {
+            string filePath; 
 
             do
             {
-                var filePath = GetPath();
+                filePath = GetPath();
 
-                try
-                {
-                    file = new FileStream(filePath, FileMode.Open, FileAccess.Read);
-                }
-                catch(FileNotFoundException)
-                {
-                    Console.WriteLine("Файл не найден");
-                }
-                catch(UnauthorizedAccessException)
-                {
-                    Console.WriteLine("Не удалось получить доступ к файлу");
-                }
-                catch(IOException ex)
-                {
-                    Console.WriteLine($"Неизвестаная ошибка с файловой системой:\n Сообщение: {ex.Message}\n HR: {ex.HResult}");
-                }
-                catch(Exception ex)
-                {
-                    Console.WriteLine($"Неизвестная ошибка:\n Сообщение: {ex.Message}\n HR: {ex.HResult}");
-                }
+            } while (FileAnalyzer.FileIsCorrect(filePath) == false);
 
-            } while (FileIsCorrect(file) == false);
-
-            return file;
-        }
-
-        private bool FileIsCorrect(FileStream file)
-        {
-            return file != null
-                && file.Length <= 104857600
-                && new Utf8Checker().IsUtf8(file); 
+            return filePath;
         }
 
         private string GetPath()

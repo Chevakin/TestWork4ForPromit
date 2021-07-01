@@ -15,6 +15,10 @@ namespace TestWork4ForPromit.Uploader
             _dictionary = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
         }
 
+        public void Remove(string str)
+        {
+            _dictionary.Remove(str);
+        }
 
         public void Add(string str)
         {
