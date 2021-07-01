@@ -10,6 +10,7 @@ namespace TestWork4ForPromit.Uploader
     public class Uploader : IDisposable
     {
         private FileStream _file;
+        private FrequencyDictionary _dictionary = new FrequencyDictionary();
 
         public void Dispose()
         {
@@ -22,6 +23,8 @@ namespace TestWork4ForPromit.Uploader
         public void Start()
         {
             _file = GetFIle();
+
+
         }
 
         private FileStream GetFIle()
