@@ -18,6 +18,14 @@ namespace TestWork4ForPromit.Uploader
             _dictionary.Remove(str);
         }
 
+        public void AddRange(IEnumerable<string> strings)
+        {
+            foreach (var str in strings)
+            {
+                Add(str);
+            }
+        }
+
         public void Add(string str)
         {
             if (_dictionary.ContainsKey(str))

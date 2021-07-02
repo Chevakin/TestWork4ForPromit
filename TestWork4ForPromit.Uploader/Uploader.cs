@@ -49,10 +49,7 @@ namespace TestWork4ForPromit.Uploader
         {
             var dictionary = new FrequencyDictionary();
 
-            foreach (var str in strings)
-            {
-                dictionary.Add(str);
-            }
+            dictionary.AddRange(strings);
 
             return dictionary;
         }
