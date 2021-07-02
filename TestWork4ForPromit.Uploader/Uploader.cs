@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TestWork4ForPromit.Domain;
 
 namespace TestWork4ForPromit.Uploader

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 
 namespace TestWork4ForPromit.Domain
@@ -8,7 +7,7 @@ namespace TestWork4ForPromit.Domain
     {
         private readonly string _path;
 
-        private const int maxLengthFile = 104857600;
+        private const int _maxLengthFile = 104857600;
 
         private const int _minLengthWord = 3;
 
@@ -79,7 +78,7 @@ namespace TestWork4ForPromit.Domain
             }
 
             var result =  file != null
-                && file.Length <= maxLengthFile
+                && file.Length <= _maxLengthFile
                 && new Utf8Checker().IsUtf8(file);
 
             if (file != null)
@@ -108,10 +107,6 @@ namespace TestWork4ForPromit.Domain
 
         private bool WordIsCorrect(string word)
         {
-            if (string.IsNullOrEmpty(word))
-            {
-                throw new ArgumentException($"\"{nameof(word)}\" не может быть неопределенным или пустым.", nameof(word));
-            }
 
             return word.Length > _minLengthWord
                 || word.Length <= _maxLengthWord;

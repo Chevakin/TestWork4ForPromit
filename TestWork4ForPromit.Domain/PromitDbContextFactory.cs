@@ -65,6 +65,15 @@ namespace TestWork4ForPromit.Domain
             } while (true);
         }
 
+        public static PromitDbContext GetReadOnlyDbContext()
+        {
+            var context = GetDbContext();
+
+            context.ChangeTracker.AutoDetectChangesEnabled = false;
+
+            return context;
+        }
+
         public static PromitDbContext GetDbContext()
         {
             var options = new DbContextOptionsBuilder()

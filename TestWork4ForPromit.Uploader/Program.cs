@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace TestWork4ForPromit.Uploader
+﻿namespace TestWork4ForPromit.Uploader
 {
     class Program
     {
