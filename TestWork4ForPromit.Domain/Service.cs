@@ -6,16 +6,16 @@ namespace TestWork4ForPromit.Domain
 {
     public class Service
     {
-        public void AddStrings(FrequencyDictionary dictionary)
+        public void AddStrings(IEnumerable<KeyValuePair<string, int>> pairs)
         {
-            if (dictionary is null)
+            if (pairs is null)
             {
-                throw new ArgumentNullException(nameof(dictionary));
+                throw new ArgumentNullException(nameof(pairs));
             }
 
             using var context = PromitDbContextFactory.GetDbContext();
 
-            foreach (var pair in dictionary)
+            foreach (var pair in pairs)
             {
                 var str = context.frequencyDictionaryStrings.FirstOrDefault(s => s.Str == pair.Key);
 
@@ -32,7 +32,7 @@ namespace TestWork4ForPromit.Domain
             }
         }
 
-        public IEnumerable<string> GetFiveMostPopularStrings(string str, int count)
+        public IEnumerable<string> GetMostPopularStrings(string str, int count)
         {
             if (string.IsNullOrEmpty(str))
             {
@@ -59,7 +59,7 @@ namespace TestWork4ForPromit.Domain
 
                 if (str1.Frequency == str2.Frequency)
                 {
-                    if (string.Compare(str1.Str, str2.Str, StringComparison.InvariantCulture) < 0)
+                    if (string.Compare(str1.Str, str2.Str, StringComparison.InvariantCulture) > 0)
                     {
                         var temp = str1;
 

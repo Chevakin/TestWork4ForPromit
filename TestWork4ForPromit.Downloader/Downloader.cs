@@ -15,7 +15,7 @@ namespace TestWork4ForPromit.Downloader
         {
             var str = GetString();
             var service = new Service();
-            var strings = service.GetFiveMostPopularStrings(str, _countStringShow);
+            var strings = service.GetMostPopularStrings(str, _countStringShow);
 
             ShowStrings(strings);
         }

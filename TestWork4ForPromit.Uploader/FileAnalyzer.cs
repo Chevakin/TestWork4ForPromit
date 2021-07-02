@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
-namespace TestWork4ForPromit.Domain
+namespace TestWork4ForPromit.Uploader
 {
     public class FileAnalyzer
     {
@@ -23,25 +24,18 @@ namespace TestWork4ForPromit.Domain
             _path = path;
         }
 
-        public void Start(FrequencyDictionary dictionary)
+        public IEnumerable<string> Start()
         {
-            if (dictionary is null)
-            {
-                throw new ArgumentNullException(nameof(dictionary));
-            }
-
             foreach (var str in File.ReadAllLines(_path))
             {
                 foreach (var word in str.Split(' '))
                 {
                     if (WordIsCorrect(word))
                     {
-                        dictionary.Add(word);
+                        yield return word;
                     }
                 }
             }
-
-            DeleteIncorrectWord(dictionary);
         }
 
         public static bool FileIsCorrect(string filename)
@@ -87,22 +81,6 @@ namespace TestWork4ForPromit.Domain
             }
 
             return result;
-        }
-
-        private void DeleteIncorrectWord(FrequencyDictionary dictionary)
-        {
-            if (dictionary is null)
-            {
-                throw new ArgumentNullException(nameof(dictionary));
-            }
-
-            foreach (var pair in dictionary)
-            {
-                if (pair.Value < 4)
-                {
-                    dictionary.Remove(pair.Key);
-                }
-            }
         }
 
         private bool WordIsCorrect(string word)

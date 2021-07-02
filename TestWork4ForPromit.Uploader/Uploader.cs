@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using TestWork4ForPromit.Domain;
 
 namespace TestWork4ForPromit.Uploader
@@ -20,9 +21,38 @@ namespace TestWork4ForPromit.Uploader
             var pathFile = GetCheckedPath();
 
             var analyzer = new FileAnalyzer(pathFile);
+            var strings = analyzer.Start();
+            var dictionary = GetDictionary(strings);
+
+            DeleteIncorrectWord(dictionary);
+
+            return dictionary;
+        }
+
+        private void DeleteIncorrectWord(FrequencyDictionary dictionary)
+        {
+            if (dictionary is null)
+            {
+                throw new ArgumentNullException(nameof(dictionary));
+            }
+
+            foreach (var pair in dictionary)
+            {
+                if (pair.Value < 4)
+                {
+                    dictionary.Remove(pair.Key);
+                }
+            }
+        }
+
+        private FrequencyDictionary GetDictionary(IEnumerable<string> strings)
+        {
             var dictionary = new FrequencyDictionary();
 
-            analyzer.Start(dictionary);
+            foreach (var str in strings)
+            {
+                dictionary.Add(str);
+            }
 
             return dictionary;
         }

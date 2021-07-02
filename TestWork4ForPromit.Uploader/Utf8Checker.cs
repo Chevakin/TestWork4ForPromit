@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace TestWork4ForPromit.Domain
+namespace TestWork4ForPromit.Uploader
 {
     /// <summary>
     /// http://anubis.dkuug.dk/JTC1/SC2/WG2/docs/n1335
