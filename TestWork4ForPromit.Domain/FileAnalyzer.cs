@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace TestWork4ForPromit.Uploader
+namespace TestWork4ForPromit.Domain
 {
-    internal class FileAnalyzer
+    public class FileAnalyzer
     {
         private readonly string _path;
 
@@ -16,11 +16,21 @@ namespace TestWork4ForPromit.Uploader
 
         public FileAnalyzer(string path)
         {
+            if (string.IsNullOrEmpty(path))
+            {
+                throw new ArgumentException($"\"{nameof(path)}\" не может быть неопределенным или пустым.", nameof(path));
+            }
+
             _path = path;
         }
 
         public void Start(FrequencyDictionary dictionary)
         {
+            if (dictionary is null)
+            {
+                throw new ArgumentNullException(nameof(dictionary));
+            }
+
             foreach (var str in File.ReadAllLines(_path))
             {
                 foreach (var word in str.Split(' '))
@@ -82,6 +92,11 @@ namespace TestWork4ForPromit.Uploader
 
         private void DeleteIncorrectWord(FrequencyDictionary dictionary)
         {
+            if (dictionary is null)
+            {
+                throw new ArgumentNullException(nameof(dictionary));
+            }
+
             foreach (var pair in dictionary)
             {
                 if (pair.Value < 4)

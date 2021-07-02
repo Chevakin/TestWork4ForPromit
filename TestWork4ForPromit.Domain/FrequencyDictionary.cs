@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 
-namespace TestWork4ForPromit.Uploader
+namespace TestWork4ForPromit.Domain
 {
     public class FrequencyDictionary : IEnumerable<KeyValuePair<string, int>>
     {

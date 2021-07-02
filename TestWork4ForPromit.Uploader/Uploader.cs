@@ -4,24 +4,32 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TestWork4ForPromit.Domain;
 
 namespace TestWork4ForPromit.Uploader
 {
     public class Uploader
     {
-        private readonly FrequencyDictionary _dictionary = new FrequencyDictionary();
-        
         public void Start()
         {
-            FillDictionary();
+            var dictionary =  GetDictionary();
+            var service = new Service();
+
+            service.AddStrings(dictionary);
+
+            Console.WriteLine("-----Загрузка выполнена успешна-----");
         }
 
-        private void FillDictionary()
+        private FrequencyDictionary GetDictionary()
         {
             var pathFile = GetCheckedPath();
 
             var analyzer = new FileAnalyzer(pathFile);
-            analyzer.Start(_dictionary);
+            var dictionary = new FrequencyDictionary();
+
+            analyzer.Start(dictionary);
+
+            return dictionary;
         }
 
         private string GetCheckedPath()
