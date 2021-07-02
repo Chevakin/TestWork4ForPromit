@@ -9,3 +9,4 @@ create table [dbo].[FrequencyDictionary]
 	[Frequency] int not null,
 )
 ```
+[Мое резюме](https://ekaterinburg.hh.ru/resume/9cc63b60ff03185c710039ed1f397049434359)
